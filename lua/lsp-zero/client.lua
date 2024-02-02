@@ -10,6 +10,7 @@ function M.setup(opts)
     local setup_id
     local desc = 'Attach LSP server'
     local defaults = {
+        print("Setting up LSP client"),
         capabilities = vim.lsp.protocol.make_client_capabilities(),
         {
             workspace = {
