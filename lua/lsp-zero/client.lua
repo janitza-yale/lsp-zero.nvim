@@ -12,13 +12,6 @@ function M.setup(opts)
     local defaults = {
         print("Setting up LSP client"),
         capabilities = vim.lsp.protocol.make_client_capabilities(),
-        {
-            workspace = {
-                didChangeWatchedFiles = {
-                    dynamicRegistration = false
-                }
-            }
-        },
         on_exit = vim.schedule_wrap(function()
             if setup_id then
                 pcall(vim.api.nvim_del_autocmd, setup_id)
@@ -26,7 +19,13 @@ function M.setup(opts)
         end)
     }
 
-    local config = vim.tbl_deep_extend('force', defaults, opts)
+    local config = vim.tbl_deep_extend('force', defaults, {
+        workspace = {
+            didChangeWatchedFiles = {
+                dynamicRegistration = false
+            }
+        }
+    })
 
     local get_root = opts.root_dir
     if type(get_root) == 'function' then
