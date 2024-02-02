@@ -17,7 +17,7 @@ function M.setup(opts)
                     dynamicRegistration = false
                 }
             }
-        }
+        },
         on_exit = vim.schedule_wrap(function()
             if setup_id then
                 pcall(vim.api.nvim_del_autocmd, setup_id)
